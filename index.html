@@ -433,6 +433,8 @@
       transition: transform 0.5s ease;
     }
     .product-card:hover .product-img img { transform: scale(1.08); }
+    .product-card:hover .product-img img.img-scaled { transform: scale(1.65); }
+    img.img-scaled { transform: scale(1.5); }
     .product-body {
       padding: 24px;
     }
@@ -997,7 +999,7 @@
             <div class="feature-icon">🌱</div>
             <div>
               <h4>Materiales premium</h4>
-              <p>Acero galvanizado, HDPE reciclado y caucho de calidad</p>
+              <p>Acero galvanizado, HDPE reciclado, maderas laminadas y caucho de calidad</p>
             </div>
           </div>
           <div class="feature-item">
@@ -1022,14 +1024,25 @@
       <p class="section-desc">Equipamiento completo para transformar cualquier espacio en una zona de ocio, deporte y disfrute.</p>
     </div>
     <div class="products-grid">
-      <div class="product-card wide reveal" style="transition-delay:0.1s">
+      <div class="product-card reveal" style="transition-delay:0.1s">
         <div class="product-img">
           <img src="reisc/img/hero.png" alt="Juego infantil estructura grande" loading="lazy">
         </div>
         <div class="product-body">
           <div class="product-tag">Más popular</div>
-          <h3>Juegos Infantiles</h3>
+          <h3>Juegos Infantiles metálicos</h3>
           <p>Estructuras de juego multifunción con toboganes, túneles, escaleras y figuras temáticas. Adaptadas a distintas edades y tamaños de espacio. Diseños únicos que hacen el parque irresistible para los niños.</p>
+          <div class="product-arrow"><a href="#contacto">Ver opciones →</a></div>
+        </div>
+      </div>
+      <div class="product-card reveal" style="transition-delay:0.15s">
+        <div class="product-img">
+          <img src="reisc/img/imagen34.png" alt="Juegos infantiles de madera" loading="lazy" class="img-scaled" style="object-fit:contain; background:#f0f7ea;">
+        </div>
+        <div class="product-body">
+          <div class="product-tag">Natural</div>
+          <h3>Juegos Infantiles de madera</h3>
+          <p>Estructuras de madera tratada para exterior, resistentes y de aspecto natural. Perfectas para parques que buscan integración con el entorno y una estética cálida y sostenible.</p>
           <div class="product-arrow"><a href="#contacto">Ver opciones →</a></div>
         </div>
       </div>
@@ -1058,7 +1071,7 @@
       </div>
       <div class="product-card reveal" style="transition-delay:0.4s">
         <div class="product-img">
-          <img src="reisc/img/img3.jpg" alt="Columpio doble infantil" loading="lazy">
+          <img src="reisc/img/img3.png" alt="Columpio doble infantil" loading="lazy" style="object-fit:contain; background:#f0f7ea;">
         </div>
         <div class="product-body">
           <div class="product-tag">Infantil</div>
@@ -1202,7 +1215,7 @@
               <div class="contact-item-icon">📞</div>
               <div class="contact-item-text">
                 <strong>Teléfono</strong>
-                <span>918 650 179</span>
+                <span>913 360 883</span>
               </div>
             </div>
             <div class="contact-item">
@@ -1217,20 +1230,21 @@
       </div>
       <div class="reveal-right">
         <div class="contact-form">
-          <form>
+          <form action="https://formspree.io/f/xlgvajgy" method="POST">
+            <input type="hidden" name="_subject" value="Nueva solicitud desde REISC BIOSERVICIOS">
             <div class="form-row">
               <div>
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" placeholder="Tu nombre">
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
               </div>
               <div>
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="tu@email.com">
+                <input type="email" id="email" name="email" placeholder="tu@email.com">
               </div>
             </div>
             <div class="form-group">
               <label for="tipo">Tipo de proyecto</label>
-              <select id="tipo">
+              <select id="tipo" name="tipo_proyecto">
                 <option value="">Selecciona una opción</option>
                 <option>Juego infantil</option>
                 <option>Fitness exterior</option>
@@ -1242,7 +1256,7 @@
             </div>
             <div class="form-group">
               <label for="mensaje">Cuéntanos tu proyecto</label>
-              <textarea id="mensaje" placeholder="Describe el espacio, el tipo de equipamiento que necesitas, superficie aproximada..."></textarea>
+              <textarea id="mensaje" name="message" placeholder="Describe el espacio, el tipo de equipamiento que necesitas, superficie aproximada..."></textarea>
             </div>
             <button type="submit" class="form-submit">Enviar solicitud →</button>
           </form>
