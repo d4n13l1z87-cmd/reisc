@@ -818,21 +818,30 @@
       nav { padding: 20px 24px; }
       .nav-links { display: none; }
       section, .cta-band, footer { padding-left: 24px; padding-right: 24px; }
+      #nosotros, #productos, #proyectos, #servicios, #contacto { padding-left: 24px; padding-right: 24px; }
       .hero-content { padding: 0 24px; }
       .hero-stats { display: none; }
-      .about-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-features { grid-template-columns: 1fr; }
+      .products-header { flex-direction: column; align-items: flex-start; gap: 16px; }
       .products-grid { grid-template-columns: 1fr; }
       .product-card.wide { grid-column: span 1; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr 1fr; }
       .proj { grid-column: span 1 !important; height: 220px !important; }
       .form-row { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
     }
 
-    /* ── Pelota custom cursor ── */
+    /* ── Pelota custom cursor — solo dispositivos con ratón ── */
     @media (pointer: fine) {
       * { cursor: none !important; }
+      #cursor-ball { display: block; }
+    }
+    @media (pointer: coarse) {
+      #cursor-ball { display: none !important; }
     }
     #cursor-ball {
       width: 28px;
@@ -1398,25 +1407,52 @@
     });
   </script>
 
+  <!-- Lightbox proyectos -->
+  <div id="lightbox" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;padding:20px;">
+    <img id="lightbox-img" style="max-width:100%;max-height:90vh;border-radius:12px;object-fit:contain;">
+    <button id="lightbox-close" style="position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.15);border:none;color:white;font-size:1.8rem;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">×</button>
+  </div>
+  <script>
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.proj img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeLightbox();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
   <!-- Pelota custom cursor -->
   <div id="cursor-ball"></div>
   <script>
-    (function () {
-      const ball = document.getElementById('cursor-ball');
-      let mx = 0, my = 0, bx = 0, by = 0;
-      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-      (function tick() {
-        bx += (mx - bx) * 0.18;
-        by += (my - by) * 0.18;
-        ball.style.left = bx + 'px';
-        ball.style.top  = by + 'px';
-        requestAnimationFrame(tick);
+    if (window.matchMedia('(pointer: fine)').matches) {
+      (function () {
+        const ball = document.getElementById('cursor-ball');
+        let mx = 0, my = 0, bx = 0, by = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        (function tick() {
+          bx += (mx - bx) * 0.18;
+          by += (my - by) * 0.18;
+          ball.style.left = bx + 'px';
+          ball.style.top  = by + 'px';
+          requestAnimationFrame(tick);
+        })();
+        document.querySelectorAll('a, button').forEach(el => {
+          el.addEventListener('mouseenter', () => ball.classList.add('hover'));
+          el.addEventListener('mouseleave', () => ball.classList.remove('hover'));
+        });
       })();
-      document.querySelectorAll('a, button').forEach(el => {
-        el.addEventListener('mouseenter', () => ball.classList.add('hover'));
-        el.addEventListener('mouseleave', () => ball.classList.remove('hover'));
-      });
-    })();
+    }
   </script>
 </body>
 </html>
